@@ -22,12 +22,14 @@ axios.interceptors.response.use(
     res => {
         if (res.status !== 200) {
             Toast({ message: '请求错误！错误代码：' + res.status + ',' + res.statusText, position: 'top' })
+            return ''
         } else if (res.data.code !== 200) {
             Toast({ message: '请求错误！错误代码：' + res.data.code, position: 'top' })
+            return ''
         } else {
             Toast({ message: '请求成功！', position: 'top' })
+            return res.data
         }
-        return res
     },
     err => {
         return Promise.reject(err)
